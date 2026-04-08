@@ -105,20 +105,23 @@ RDP Brute Force Alert
   "@timestamp": "2026-03-05T13:30:42Z"
 }
 ```
-Screenshots (RDP)
-![RDP Brute Force](detections/brute-force/rdp-bruteforce.png)
+## **Screenshots (RDP)**
 
-![RDP Alert](detections/brute-force/rdpalert.png)
+![RDP Brute Force](rdp-bruteforce.png)
 
-![RDP Rule](detections/brute-force/rdprule.png)
+![RDP Alert](rdpalert.png)
 
-Screenshots (SSH)
+![RDP Rule](rdprule.png)
 
-![SSH Brute Force](detections/brute-force/ssh-bruteforce.png)
+---
 
-![SSH Alert](detections/brute-force/sshalert.png)
+## **Screenshots (SSH)**
 
-![SSH Rule](detections/brute-force/sshrule.png)
+![SSH Brute Force](ssh-bruteforce.png)
+
+![SSH Alert](sshalert.png)
+
+![SSH Rule](sshrule.png)
 
 Key Insight
 
