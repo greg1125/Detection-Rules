@@ -92,10 +92,11 @@ The alert generated within Elastic Security confirms that the rule successfully 
 
 The host investigation view shows additional context about the affected system, including system details and related alert activity.
 
-![Mythic C2 Interface](mythic-c2.png)  
-![Detection Rule](mythic-rule.png)  
-![Alert View](mythic-alert.png)
+![Mythic C2 Interface](mythic-c2-interface.png)
 
+![Detection Rule](Mythicrule.png)
+
+![Alert View](mythicalert.png)
 ---
 
 ## **Key Insight**
