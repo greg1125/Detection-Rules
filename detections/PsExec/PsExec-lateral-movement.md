@@ -20,9 +20,7 @@ This detection is implemented using an Event Correlation rule within Kibana to i
 sequence by host.name with maxspan=2m
   [authentication where event.code == "4624" and winlog.event_data.LogonType == "3"]
   [any where event.code == "7045" and winlog.event_data.ImagePath != null]
-
 ```
-
 ---
 
 ## **Detection Logic**
@@ -55,8 +53,6 @@ This activity maps to the following MITRE ATT&CK technique:
 
 T1021.002 – Remote Services: SMB / Windows Admin Shares
 
-This technique describes the use of SMB and administrative shares to execute commands on remote systems, which aligns directly with how PsExec and Impacket operate.
-
 ---
 
 ## **Investigation Playbook**
@@ -75,16 +71,57 @@ Finally, analysts should determine whether the activity was authorized. If it ca
 
 ## **Sample Alert Output**
 
-The following fields are typically observed in alerts generated from this detection:
-
-```json id="2n8f4k"
+```json
 {
-  "host.name": "xxxxx",
-  "user.name": "xxxx",
-  "service.name": "vfpD",
-  "@timestamp": "2026-04-07T19:44:07Z"
+  "host.name": "LAB-SERVER-01",
+  "user.name": "Administrator",
+  "service.name": "svc_random",
+  "@timestamp": "2026-04-06T14:49:28Z"
 }
 ```
+
+---
+
+## **Correlated Event Output (Sanitized)**
+
+### **Stage 1: Network Authentication (4624)**
+
+```json
+{
+  "event.code": "4624",
+  "event.outcome": "success",
+  "@timestamp": "2026-04-06T14:15:37Z",
+
+  "host.name": "LAB-SERVER-01",
+  "user.name": "Administrator",
+
+  "source.ip": "ATTACKER-IP",
+  "logon.type": "3",
+  "authentication": "NTLMv2",
+  "privilege": "elevated"
+}
+```
+### **Stage 2: Service Creation (7045)**
+{
+  "event.code": "7045",
+  "@timestamp": "2026-04-06T14:49:28Z",
+
+  "host.name": "LAB-SERVER-01",
+  "user.name": "Administrator",
+
+  "service.name": "svc_random",
+  "service.path": "%systemroot%\\random.exe",
+  "service.account": "LocalSystem"
+}
+
+---
+
+## **Correlation Summary**
+
+A remote system authenticated to the target host using administrative credentials, followed by the creation of a service on the same system.
+
+This sequence strongly indicates remote code execution via service-based lateral movement.
+
 ---
 
 ## **Screenshots**
@@ -118,7 +155,7 @@ This reinforces the importance of behavior-based detection strategies in modern 
 
 This activity represents a high-confidence indicator of lateral movement within a Windows environment.
 
-While legitimate administrative tools can create services, the combination of remote authentication followed immediately by service creation, especially with randomized naming, significantly increases the likelihood of malicious intent.
+While legitimate administrative tools can create services, the combination of remote authentication followed immediately by service creation significantly increases the likelihood of malicious intent.
 
 Analysts must evaluate the source of authentication, user context, and service execution details to determine whether the activity is authorized.
 
