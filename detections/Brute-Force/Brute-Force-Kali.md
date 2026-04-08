@@ -123,13 +123,14 @@ RDP Brute Force Alert
 
 ![SSH Rule](sshrule.png)
 
-Key Insight
+## **Key Insight**
 
 Brute force attacks generate a high volume of failed authentication attempts that can be reliably detected using threshold-based rules.
 
 Unlike more stealthy attack techniques, brute force activity is noisy and produces a clear pattern of repeated failures, making it well-suited for detection through aggregation and rate-based analysis.
 
-Operational Context
+
+## **Operational Context**
 
 This activity represents a likely credential attack against exposed authentication services.
 
