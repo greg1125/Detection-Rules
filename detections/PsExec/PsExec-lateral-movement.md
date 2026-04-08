@@ -138,9 +138,11 @@ The alert generated within Elastic Security confirms that the correlation rule s
 
 The ticket generated within osTicket via the automated alert pipeline demonstrates a complete SOC workflow, where detection leads to incident creation and tracking.
 
-![Detection Rule](kibana-rule.png)  
-![Event 7045 Log](event-7045-log.png)
+![4624 Authentication Event](4624-auth.png)
 
+![7045 Service Creation Event](7045-event.png)
+
+![PsExec Detection Rule](PsExec-rule.png)
 ---
 
 ## **Key Insight**
