@@ -105,6 +105,21 @@ RDP Brute Force Alert
   "@timestamp": "2026-03-05T13:30:42Z"
 }
 ```
+Screenshots (RDP)
+![RDP Brute Force](detections/brute-force/rdp-bruteforce.png)
+
+![RDP Alert](detections/brute-force/rdpalert.png)
+
+![RDP Rule](detections/brute-force/rdprule.png)
+
+Screenshots (SSH)
+
+![SSH Brute Force](detections/brute-force/ssh-bruteforce.png)
+
+![SSH Alert](detections/brute-force/sshalert.png)
+
+![SSH Rule](detections/brute-force/sshrule.png)
+
 Key Insight
 
 Brute force attacks generate a high volume of failed authentication attempts that can be reliably detected using threshold-based rules.
