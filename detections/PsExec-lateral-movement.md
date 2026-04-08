@@ -44,3 +44,44 @@ The following EQL rule was used to identify this activity:
 sequence by host.id with maxspan=5m
   [any where event.code == "4624" and winlog.event_data.LogonType == "3"]
   [any where event.code == "7045"]
+```
+
+ **Screenshots**
+
+The following evidence was captured to validate the detection.
+
+Successful network authentication event (4624, Logon Type 3) demonstrates that credentials were used to access the target system over the network.
+
+Service installation event (7045) shows the creation of a randomized service name and executable, indicating remote command execution behavior.
+
+Detection alert triggered within Elastic Security confirms that the correlation rule successfully identified the attack sequence.
+
+Ticket generated within osTicket via the automated alert pipeline demonstrates end-to-end SOC workflow from detection to incident response.
+
+All screenshots are stored in the following directory.
+
+---
+
+## **Key Insight**
+
+Impacket-based lateral movement did not use the default `PSEXESVC` service name, instead generating randomized service names and executables. Detection was therefore designed around behavioral patterns (remote authentication followed by service creation) rather than static indicators.
+
+This reinforces the importance of behavior-based detection strategies when identifying adversary activity in modern environments.
+
+---
+
+## **Operational Context**
+
+This activity represents a high-confidence indicator of lateral movement within a Windows environment. While administrative tools may exhibit similar behavior, the use of randomized service names and unexpected execution paths increases the likelihood of malicious intent.
+
+Analysts should validate the source of authentication, including the originating IP address, the user account involved, the service name and executable path, and the frequency and timing of similar events across the environment.
+
+---
+
+## **Key Takeaway**
+
+This detection demonstrates how correlating multiple low-level system events can reveal higher-level attacker behavior. By linking authentication activity with service creation, it is possible to identify lateral movement techniques that would otherwise evade simple, single-event detections.
+
+---
+
+
