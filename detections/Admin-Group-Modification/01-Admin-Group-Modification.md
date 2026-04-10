@@ -107,6 +107,10 @@ The user is removed and re-added to the Administrators group to ensure that fres
 
 ## **Screenshots**
 
+The following screenshots document the end-to-end detection workflow, capturing the execution of the attack, the resulting Windows Security events, and the alert generated within Elastic Security.
+
+These visuals validate that the simulated privilege escalation activity was successfully detected and correlated, demonstrating the effectiveness of the detection logic.
+
 ![Windows Event ID 4732 Log](4732-auth.png)
 
 ![Net User Command Execution](net-user-command.png)
