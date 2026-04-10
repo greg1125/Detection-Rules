@@ -103,12 +103,17 @@ The detection is validated by executing the attack and confirming that logs are 
 
 The user is removed and re-added to the Administrators group to ensure that fresh events are generated during testing. Alerts are reviewed to confirm that they accurately reflect the detected activity.
 
+
+
 ## **Screenshots**
 
-![Windows Event ID 4732 Authentication Log](4732-auth.png)
-![Admin Group Modification Alert](local-adminrule-alert.png)
+![Windows Event ID 4732 Log](4732-auth.png)
+
 ![Net User Command Execution](net-user-command.png)
 
+![Admin Group Modification Alert](local-adminrule-alert.png)
+
+---
 
 ## **Key Insight**
 
