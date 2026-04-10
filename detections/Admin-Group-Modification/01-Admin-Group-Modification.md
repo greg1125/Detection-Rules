@@ -111,7 +111,7 @@ The user is removed and re-added to the Administrators group to ensure that fres
 
 ![Net User Command Execution](net-user-command.png)
 
-![Admin Group Modification Alert](local-adminrule-alert.png)
+![Admin Group Modification Alert](local-adminruule-alert.png)
 
 ---
 
