@@ -232,6 +232,42 @@ Validation ensures that logs are generated correctly, detection rules trigger as
 
 ---
 
+## **Threat Simulation (Mythic C2)**
+
+---
+
+Adversary activity within this lab is simulated using the Mythic Command and Control (C2) framework.
+
+Mythic is used to emulate post-exploitation behavior, allowing for realistic attacker techniques such as command execution, persistence, and lateral movement. The Apollo agent is deployed on a Windows endpoint to simulate an active compromise and generate telemetry.
+
+This enables the lab to move beyond simple attack tools and instead replicate real-world adversary behavior, including stealthy execution and custom payload delivery.
+
+The use of Mythic allows detections to be built against behavior rather than tool signatures, reinforcing a detection engineering approach focused on attacker techniques.
+
+---
+
+## **Mythic C2 Detection Considerations**
+
+---
+
+Detection logic for Mythic activity is based on process execution patterns and suspicious command behavior observed in Windows event logs.
+
+Rather than relying on known filenames or hashes, detections focus on abnormal process creation, unusual command line arguments, and execution from non-standard directories.
+
+This approach ensures that detection remains effective even when payloads are renamed or modified, which is common in real-world adversary activity.
+
+---
+
+## **MITRE ATT&CK Mapping**
+
+---
+
+T1059 – Command and Scripting Interpreter  
+T1105 – Ingress Tool Transfer  
+T1570 – Lateral Tool Transfer  
+
+---
+
 ## **SOC Automation Pipeline**
 
 ---
