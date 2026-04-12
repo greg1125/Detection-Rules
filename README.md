@@ -141,15 +141,15 @@ T1021 – Remote Services
 T1569.002 – Service Execution  
 
 ---
+---
+---
+---
+---
+---
+---
 
 ## **Scheduled Task Persistence**
 
----
----
----
----
----
----
 ## **Detection Rule**
 
 ---
@@ -179,15 +179,16 @@ This detection was designed based on available telemetry within the lab environm
 T1053.005 – Scheduled Task/Job
 
 ---
+---
+---
+---
+---
+---
+---
 
 ## **Admin Group Privilege Escalation**
 
----
----
----
----
----
----
+
 ## **Detection Rule**
 
 ---
@@ -220,15 +221,16 @@ T1078 – Valid Accounts
 T1098 – Account Manipulation  
 
 ---
+---
+---
+---
+---
+---
+---
 
 ## **Mythic C2 Activity Detection**
 
----
----
----
----
----
----
+
 ## **Detection Rule**
 
 ---
