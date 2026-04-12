@@ -32,7 +32,7 @@ The lab environment is built using a segmented virtual network to simulate enter
 
 The environment consists of Windows endpoints, Linux endpoints, an attacker machine, and an Elastic Stack deployment used for centralized logging and detection. Elastic Agent is deployed across endpoints to collect telemetry such as Windows Event Logs and Linux authentication logs.
 
-These logs are ingested into Elasticsearch and analyzed within Kibana using KQL and EQL-based detection rules. Attack simulations are performed using tools such as Impacket, Ncrack, and native system utilities to generate realistic adversary activity.
+These logs are ingested into Elasticsearch and analyzed within Kibana using KQL and EQL-based detection rules. Attack simulations are performed using tools such as Impacket, Ncrack, Mythic, and native system utilities to generate realistic adversary activity.
 
 ---
 
@@ -206,6 +206,69 @@ T1098 – Account Manipulation
 
 ---
 
+## **Mythic C2 Activity Detection**
+
+---
+
+## **Detection Rule**
+
+---
+
+```kql
+event.code:1 and (
+  winlog.event_data.Image:"C:\\Users\\Public\\Downloads\\windows-update.exe" or
+  winlog.event_data.Hashes:"*73566D8212E86361C50A1186C07FCB67A3497370273E963C9C472FF4493BB1D5*"
+)
+```
+
+---
+
+## **Description**
+
+---
+
+This detection identifies potential Mythic Command and Control (C2) activity through suspicious process execution on a Windows endpoint.
+
+The detection focuses on process creation events (Event ID 1) and identifies execution of a payload delivered by the Mythic framework. In this lab, the payload was executed from a non-standard directory within the Public user folder, which is commonly abused by attackers to avoid detection.
+
+Additionally, the detection incorporates a known file hash associated with the payload, providing an additional layer of validation when identifying malicious execution.
+
+---
+
+## **Detection Logic**
+
+---
+
+The detection is designed to identify process execution that deviates from normal system behavior.
+
+Rather than relying solely on file names, the rule evaluates execution from uncommon directories and optionally validates the file hash when available. This ensures that even if the payload is renamed, suspicious execution patterns can still be identified.
+
+By monitoring process creation events, the detection captures early-stage post-exploitation activity, which is critical for identifying command and control behavior.
+
+---
+
+## **MITRE ATT&CK**
+
+---
+
+T1059 – Command and Scripting Interpreter  
+T1105 – Ingress Tool Transfer  
+T1055 – Process Injection  
+
+---
+
+## **Validation**
+
+---
+
+The detection was validated by executing a Mythic payload on a Windows endpoint and confirming that process creation logs were generated within Elastic Security.
+
+The payload was executed from the specified directory, and alerts were successfully triggered based on both the file path and hash conditions. Multiple executions were performed to ensure consistent alerting behavior.
+
+The presence of alerts within Kibana confirms that the detection accurately identifies Mythic-related activity within the lab environment.
+
+---
+
 ## **Detection Validation**
 
 ---
@@ -229,42 +292,6 @@ net localgroup administrators user /add
 ```
 
 Validation ensures that logs are generated correctly, detection rules trigger as expected, and alerts remain consistent across repeated testing scenarios.
-
----
-
-## **Threat Simulation (Mythic C2)**
-
----
-
-Adversary activity within this lab is simulated using the Mythic Command and Control (C2) framework.
-
-Mythic is used to emulate post-exploitation behavior, allowing for realistic attacker techniques such as command execution, persistence, and lateral movement. The Apollo agent is deployed on a Windows endpoint to simulate an active compromise and generate telemetry.
-
-This enables the lab to move beyond simple attack tools and instead replicate real-world adversary behavior, including stealthy execution and custom payload delivery.
-
-The use of Mythic allows detections to be built against behavior rather than tool signatures, reinforcing a detection engineering approach focused on attacker techniques.
-
----
-
-## **Mythic C2 Detection Considerations**
-
----
-
-Detection logic for Mythic activity is based on process execution patterns and suspicious command behavior observed in Windows event logs.
-
-Rather than relying on known filenames or hashes, detections focus on abnormal process creation, unusual command line arguments, and execution from non-standard directories.
-
-This approach ensures that detection remains effective even when payloads are renamed or modified, which is common in real-world adversary activity.
-
----
-
-## **MITRE ATT&CK Mapping**
-
----
-
-T1059 – Command and Scripting Interpreter  
-T1105 – Ingress Tool Transfer  
-T1570 – Lateral Tool Transfer  
 
 ---
 
