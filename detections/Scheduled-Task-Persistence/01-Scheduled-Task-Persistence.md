@@ -79,6 +79,12 @@ The alert screenshot demonstrates that the detection rule triggered based on the
 
 The event details screenshot highlights key fields such as `winlog.event_data.TaskName` and task content, providing visibility into the persistence mechanism.
 
+![Detection Query](./persistence-task-query.png)
+
+![Alert](./task-alert.png)
+
+![Rule](./task-rule.png)
+
 
 ---
 
