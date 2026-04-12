@@ -51,7 +51,10 @@ Each detection is designed based on the telemetry that is actually available in 
 ## **Detections Implemented**
 
 ---
-
+---
+---
+---
+---
 ## **Brute Force Authentication (SSH & RDP)**
 
 ---
