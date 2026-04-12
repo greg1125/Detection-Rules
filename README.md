@@ -100,7 +100,11 @@ A threshold-based approach highlights abnormal login behavior, where multiple fa
 T1110 – Brute Force
 
 ---
-
+---
+---
+---
+---
+---
 ## **PsExec Lateral Movement**
 
 ---
@@ -141,7 +145,11 @@ T1569.002 – Service Execution
 ## **Scheduled Task Persistence**
 
 ---
-
+---
+---
+---
+---
+---
 ## **Detection Rule**
 
 ---
@@ -175,7 +183,11 @@ T1053.005 – Scheduled Task/Job
 ## **Admin Group Privilege Escalation**
 
 ---
-
+---
+---
+---
+---
+---
 ## **Detection Rule**
 
 ---
@@ -212,7 +224,11 @@ T1098 – Account Manipulation
 ## **Mythic C2 Activity Detection**
 
 ---
-
+---
+---
+---
+---
+---
 ## **Detection Rule**
 
 ---
