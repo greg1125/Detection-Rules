@@ -114,11 +114,10 @@ T1110 – Brute Force
 ---
 
 ```eql
-sequence by host.name with maxspan=5m
-  [any where event.code == "4624" and winlog.logon.type == "3"]
-  [any where event.code == "7045"]
+sequence by host.name with maxspan=2m
+  [authentication where event.code == "4624" and winlog.event_data.LogonType == "3"]
+  [any where event.code == "7045" and winlog.event_data.ImagePath != null]
 ```
-
 ---
 
 ## **Description**
@@ -155,20 +154,26 @@ T1569.002 – Service Execution
 ---
 
 ```kql
-event.code:4698 and winlog.event_data.TaskName:*
+event.code:4698 AND (
+  winlog.event_data.TaskContent:(*cmd.exe* OR *powershell.exe*)
+  OR winlog.event_data.TaskName:("*update*" OR "*svc*" OR "*service*" OR "*system*" OR "*win*")
+)
 ```
 
 ---
+
 
 ## **Description**
 
 ---
 
-This detection identifies persistence mechanisms through scheduled task creation.
+This detection identifies persistence mechanisms through scheduled task creation with a focus on suspicious execution behavior and task naming patterns.
 
-It monitors Windows Event ID 4698, which indicates that a new scheduled task has been created. Where available, fields such as winlog.event_data.TaskName and winlog.event_data.TaskContent are used to analyze the command or executable associated with the task.
+It monitors Windows Event ID 4698, which indicates that a new scheduled task has been created. The detection evaluates the task content to identify execution of command interpreters such as cmd.exe and powershell.exe, which are commonly used by attackers to establish persistence.
 
-This detection was designed based on available telemetry within the lab environment, where process creation logs were not consistently available. As a result, the detection focuses on task creation events and their associated metadata.
+In addition to execution behavior, the detection analyzes task naming patterns for keywords such as update, svc, service, system, and win. These naming conventions are frequently used by attackers to disguise malicious tasks as legitimate system activity.
+
+This combined approach improves detection fidelity by identifying both the intent of the task and attempts to blend in with normal system processes. The detection is designed based on available telemetry within the lab environment, where process creation logs were not consistently available, requiring reliance on task creation events and associated metadata.
 
 ---
 
